@@ -108,10 +108,10 @@ app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
 app.use("/", userRouter);
 
-// ROOT Route
-app.get("/" , (req, res) => {
-    res.send("Hii, This is root called");
-});
+// // ROOT Route
+// app.get("/" , (req, res) => {
+//     res.send("Hii, This is root called");
+// });
 
 
 
