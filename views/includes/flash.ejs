@@ -1,0 +1,50 @@
+
+<!-- Toast Container -->
+<div aria-live="polite" aria-atomic="true" class="position-relative">
+    <div class="toast-container position-fixed top-1 start-4 p-3">
+        <% if ((success && success.length )) { %>
+            <div id="flashToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                    <strong class="me-auto">
+                        Successfull
+                    </strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body">
+                    <%= success %>
+                </div>
+            </div>
+        <% } %>
+    </div>
+</div>
+
+<!-- Toast Container -->
+<div aria-live="polite" aria-atomic="true" class="position-relative">
+    <div class="toast-container position-fixed top-1 start-4 p-3">
+        <% if ( (error && error.length)) { %>
+            <div id="flashToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                    <strong class="me-auto">
+                        Error 
+                    </strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body">
+                        <%= error %>
+                </div>
+            </div>
+        <% } %>
+    </div>
+</div>
+
+<!-- Toast Activation Script -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var toastElement = document.getElementById('flashToast');
+        if (toastElement) {
+            var toast = new bootstrap.Toast(toastElement);
+            toast.show();
+        }
+    });
+</script>
+

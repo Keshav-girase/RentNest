@@ -1,0 +1,27 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="container mt-5">
+    <div class="row justify-content-center mt-3">
+        <div class="col-md-6 col-lg-5 col-sm-8 col-10" style="padding: 2rem; border: 0.5px solid black; border-radius: 1rem;">
+            <h4 class="text-center"><b>Log in for RentNest</b></h4>
+            <p style="text-align: center; text-transform: capitalize; color: rgb(37, 37, 37);">Unlock Your Perfect Home - Join RentNest Today!</p>
+            <form id="loginForm" action="/login" method="POST" novalidate class="needs-validation">
+                <div class="form-group mt-4 mb-3">
+                    <label for="username" class="mb-1">Username</label>
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Enter username" required>
+                    <div class="valid-feedback">Username looks good!</div>
+                    <div class="invalid-feedback">Please enter a username.</div>
+                </div>
+                <div class="form-group mt-4 mb-3">
+                    <label for="password" class="mb-1">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Password" required minlength="6">
+                    <div class="invalid-feedback">
+                        Password must be at least 6 characters long.
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-pink col-12 mt-4 mb-3">Log In</button>
+                <p class="text-center mt-3">Don't have an account? <a href="/signup">Register here</a></p>
+            </form>
+        </div>
+    </div>
+</div>

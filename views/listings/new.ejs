@@ -1,0 +1,212 @@
+<% layout("/layouts/boilerplate") %>
+<body>
+
+    <% include("../includes/navbar.ejs") %>
+
+<!-- <div class="" style="width: 40rem; padding: 3rem; margin: 5rem 20rem; border: 0.5px solid black; border-radius: 1rem;"> -->
+    <div class="row" style="margin: 3rem 0;">
+        <div class="col-md-8 offset-md-2 col-sm-10 offset-sm-1" style="padding: 2rem; border: 0.5px solid black; border-radius: 1rem;">
+            <h3>
+                Create
+                <small class="text-body-secondary">New Listing</small>
+            </h3>
+        
+            <form method="POST" action="/listings" novalidate class="needs-validation" enctype="multipart/form-data">
+        
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title</label>
+                    <input type="text" name="listing[title]" placeholder="Enter your title" id="title" class="form-control" required>
+                    <div class="valid-feedback"> Title looks great! </div>
+                    <div class="invalid-feedback"> Please enter a valid title. It should not be empty. </div>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description</label>
+                    <textarea name="listing[description]" id="description" placeholder="Enter Your Description" class="form-control" required></textarea>
+                    <div class="valid-feedback">Description is valid.</div>
+                    <div class="invalid-feedback">Please provide a description. This field cannot be empty.</div>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="FileName" class="form-label">Upload Your image</label>
+                    <input type="file" name="listing[image]" id="FileName" class="form-control" required>
+                    <div class="valid-feedback">Filename looks good!</div>
+                    <div class="invalid-feedback">Filename cannot be empty. Please enter a valid filename.</div>
+                </div>
+        
+                
+                <!-- <div class="mb-3">
+                    <label for="url" class="form-label">Image Link</label>
+                    <input type="text" name="listing[image][url]" placeholder="Enter your image URL" id="url" class="form-control" required>
+                    <div class="valid-feedback">Image link is valid.</div>
+                    <div class="invalid-feedback">Please enter a valid image URL.</div>
+                </div> -->
+                
+                <div class="mb-3 row">
+
+                    <div class="col-md-5">
+                        <label for="price" class="form-label">Price</label>
+                        <input type="number" name="listing[price]" placeholder="Enter your price" id="price" class="form-control" required>
+                        <div class="valid-feedback">Price is valid.</div>
+                        <div class="invalid-feedback">Please enter a valid price. It should be a positive number.</div>
+                    </div>
+
+                    <div class="col-md-7">
+                        <label for="country" class="form-label">Country</label>
+                        <input type="text" name="listing[country]" placeholder="enter your country" id="country" class="form-control" required>
+                        <div class="valid-feedback">Country is valid.</div>
+                        <div class="invalid-feedback">Please enter a valid country name.</div>
+                    </div>
+
+                </div>
+
+                <div class="mb-3 auto-search-wrapper">
+                    <label for="search" class="form-label">Location</label>
+                    <input type="text" name="listing[location]" autocomplete="off" placeholder="enter your location" id="search" class="form-control" required>
+                    <div class="valid-feedback">Location looks good!</div>
+                    <div class="invalid-feedback">Please provide a location. This field cannot be empty.</div>
+                </div>
+                
+                <!-- <div class="auto-search-wrapper mb-3">
+                    <label for="Location" class="form-label">Location</label>
+                    <input
+                      name="listing[location]"
+                      type="text"
+                      autocomplete="off"
+                      id="search"
+                      class="full-width form-control"
+                      placeholder="enter the city name"
+                    />
+                </div> -->
+
+                <button class="btn btn-primary btn-pink" type="submit">Add</button>
+            </form>
+        </div>
+    </div>
+
+
+    <% include("../includes/footer.ejs") %>
+<!-- </div> -->
+<script src="https://cdn.jsdelivr.net/gh/tomickigrzegorz/autocomplete@1.8.3/dist/js/autocomplete.min.js"></script>
+<script>
+    // minimal configure
+new Autocomplete("search", {
+  // default selects the first item in
+  // the list of results
+  selectFirst: true,
+
+  // The number of characters entered should start searching
+  howManyCharacters: 2,
+
+  // onSearch
+  onSearch: ({ currentValue }) => {
+    // You can also use static files
+    // const api = '../static/search.json'
+    const api = `https://nominatim.openstreetmap.org/search?format=geojson&limit=5&city=${encodeURI(
+      currentValue
+    )}`;
+
+    /**
+     * jquery
+     */
+    // return $.ajax({
+    //     url: api,
+    //     method: 'GET',
+    //   })
+    //   .done(function (data) {
+    //     return data
+    //   })
+    //   .fail(function (xhr) {
+    //     console.error(xhr);
+    //   });
+
+    // OR -------------------------------
+
+    /**
+     * axios
+     * If you want to use axios you have to add the
+     * axios library to head html
+     * https://cdnjs.com/libraries/axios
+     */
+    // return axios.get(api)
+    //   .then((response) => {
+    //     return response.data;
+    //   })
+    //   .catch(error => {
+    //     console.log(error);
+    //   });
+
+    // OR -------------------------------
+
+    /**
+     * Promise
+     */
+    return new Promise((resolve) => {
+      fetch(api)
+        .then((response) => response.json())
+        .then((data) => {
+          resolve(data.features);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    });
+  },
+  // nominatim GeoJSON format parse this part turns json into the list of
+  // records that appears when you type.
+  onResults: ({ currentValue, matches, template }) => {
+    const regex = new RegExp(currentValue, "gi");
+
+    // if the result returns 0 we
+    // show the no results element
+    return matches === 0
+      ? template
+      : matches
+          .map((element) => {
+            return `
+          <li class="loupe">
+            <p>
+              ${element.properties.display_name.replace(
+                regex,
+                (str) => `<b>${str}</b>`
+              )}
+            </p>
+          </li> `;
+          })
+          .join("");
+  },
+
+  // we add an action to enter or click
+  onSubmit: ({ object }) => {
+    // remove all layers from the map
+    map.eachLayer(function (layer) {
+      if (!!layer.toGeoJSON) {
+        map.removeLayer(layer);
+      }
+    });
+
+    const { display_name } = object.properties;
+    const [lng, lat] = object.geometry.coordinates;
+
+    const marker = L.marker([lat, lng], {
+      title: display_name,
+    });
+
+    marker.addTo(map).bindPopup(display_name);
+
+    map.setView([lat, lng], 8);
+  },
+
+  // get index and data from li element after
+  // hovering over li with the mouse or using
+  // arrow keys ↓ | ↑
+  onSelectedItem: ({ index, element, object }) => {
+    console.log("onSelectedItem:", index, element, object);
+  },
+
+  // the method presents no results element
+  noResults: ({ currentValue, template }) =>
+    template(`<li>No results found: "${currentValue}"</li>`),
+});
+</script>
+</body>

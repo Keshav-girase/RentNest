@@ -1,0 +1,74 @@
+<% layout("/layouts/boilerplate") %>
+<body>
+
+    <% include("../includes/navbar.ejs") %>
+
+    <!-- <h2>Edit Listing</h2> -->
+    <div class="row" style="margin: 3rem 0;">
+        <div class="col-md-8 offset-md-2 col-sm-10 offset-sm-1" style="padding: 2rem; border: 0.5px solid black; border-radius: 1rem;">
+ 
+            <h3>
+                Edit
+                <small class="text-body-secondary">Listing</small>
+            </h3>
+
+            <form method="POST" action="/listings/<%= listing._id %>?_method=PUT" novalidate class="needs-validation" enctype="multipart/form-data">
+
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title</label>
+                    <input type="text" name="listing[title]" value="<%= listing.title %>" id="title" class="form-control" required>
+                    <div class="valid-feedback"> Title looks great! </div>
+                    <div class="invalid-feedback"> Please enter a valid title. It should not be empty. </div>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description</label>
+                    <textarea name="listing[description]" id="description"  class="form-control"  required><%= listing.description %></textarea>
+                    <div class="valid-feedback">Description is valid.</div>
+                    <div class="invalid-feedback">Please provide a description. This field cannot be empty.</div>
+                </div>
+                
+                <div class="mb-3 col-4">
+                    <label for="img"></label>
+                    <img src=<%= originalImgURL %>  alt="" id="img" class="col-11">
+                </div>
+                
+                <div class="mb-3">
+                    <label for="url" class="form-label">Image Link</label>
+                    <input type="file" name="listing[image]" id="url" class="form-control">
+                    <div class="valid-feedback">Image link is valid.</div>
+                    <div class="invalid-feedback">Please enter a valid image URL.</div>
+                </div>
+
+                <div class="mb-3 row">
+
+                    <div class="col-md-5">
+                        <label for="price" class="form-label">Price</label>
+                        <input type="number" name="listing[price]" value="<%= listing.price %>" placeholder="Enter your price" id="price" class="form-control" required>
+                        <div class="valid-feedback">Price is valid.</div>
+                        <div class="invalid-feedback">Please enter a valid price. It should be a positive number.</div>
+                    </div>
+
+                    <div class="col-md-7">
+                        <label for="country" class="form-label">Country</label>
+                        <input type="text" name="listing[country]" value="<%= listing.country %>" placeholder="enter your country" id="country" class="form-control" required>
+                        <div class="valid-feedback">Country is valid.</div>
+                        <div class="invalid-feedback">Please enter a valid country name.</div>
+                    </div>
+
+                </div>
+
+                <div class="mb-3 ">
+                    <label for="Location" class="form-label">Location</label>
+                    <input type="text" name="listing[location]" value="<%= listing.location %>" placeholder="enter your location" id="Location" class="form-control" required>
+                    <div class="valid-feedback">Location looks good!</div>
+                    <div class="invalid-feedback">Please provide a location. This field cannot be empty.</div>
+                </div>
+                
+                <button class="btn btn-primary btn-pink">Edit</button>
+
+            </form>
+        </div>
+    </div>
+    <% include("../includes/footer.ejs") %>
+</body>

@@ -1,0 +1,51 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="container mt-5">
+    <div class="row mt-3">
+        <div class="col-6 offset-3" style="padding: 2rem; border: 0.5px solid black; border-radius: 1rem;">
+            <h4 class="text-center"><b>Sign Up for RentNest </b></h4>
+            <p style="text-align: center; text-transform: capitalize; color: rgb(37, 37, 37);">Unlock Your Perfect Home - Join RentNest Today!</p>
+            <form id="signupForm" action="/signup" method="POST" novalidate class="needs-validation">
+                <div class="form-group mt-4 mb-3">
+                    <label for="username" class="mb-1">Username</label>
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Enter username" required>
+                    <div class="valid-feedback"> Username looks Good! </div>
+                    <div class="invalid-feedback">Please enter a username.</div>
+                </div>
+                <div class="form-group mt-4 mb-3">
+                    <label for="email" class="mb-1">Email address</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" required>
+                    <div class="valid-feedback"> Title looks great! </div>
+                    <div class="invalid-feedback">Please enter a valid email address.</div>
+                </div>
+                <div class="form-group mt-4 mb-3">
+                    <label for="password" class="mb-1">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Password" required minlength="6">
+                    <div class="invalid-feedback">
+                        Password must be at least 6 characters long.
+                    </div>
+                </div>
+                <div class="form-group mt-4 mb-3">
+                    <label for="confirmPassword" class="mb-1">Confirm Password</label>
+                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required>
+                    <div class="invalid-feedback">
+                        Passwords do not match.
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-pink col-12 mt-4 mb-3">Sign Up</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Password match validation
+    document.getElementById('signupForm').addEventListener('submit', function(event) {
+        var password = document.getElementById('password').value;
+        var confirmPassword = document.getElementById('confirmPassword').value;
+        if (password !== confirmPassword) {
+            event.preventDefault();
+            document.getElementById('confirmPassword').setCustomValidity("Passwords do not match");
+        } 
+    });
+</script>

@@ -1,0 +1,89 @@
+
+<% layout("/layouts/boilerplate") %>
+    <style>
+        .Scrollable-filters {
+            display: inline-flex;
+            overflow-x: scroll;
+            /* flex-wrap: wrap; */
+            width: 70%;
+        }
+
+        .Scrollable-filters::-webkit-scrollbar {
+            display: none;
+        }
+        .filter {
+            margin-top: 1rem;
+            margin-right: 2rem;
+            text-align: center;
+            opacity: 0.7;
+        }
+
+        .filter:hover {
+            opacity: 1;
+            cursor: pointer;
+        }
+
+        .filter p {
+            font-size: 0.8rem;
+        }
+        .tax-box{
+            border: 1px solid black;
+            border-radius: 0.7rem;
+            padding: 0.7rem;
+            width: fit-content;
+        }
+    </style>
+<div class="d-flex align-items-center justify-content-between">
+    <div class="Scrollable-filters" >
+        <div class="filter"><i class="fa-solid fa-umbrella-beach"></i> <p>Icons</p></div>
+        <div class="filter"><i class="fa-solid fa-tree"></i> <p>Beach</p></div>
+        <div class="filter"><i class="fa-solid fa-person-swimming"></i><p>Pools</p></div>
+        <div class="filter"><i class="fa-solid fa-cow"></i><p>Farms</p></div>
+        <div class="filter"><i class="fa-regular fa-snowflake"></i><p>Arctic</p></div>
+        <div class="filter"><i class="fa-solid fa-mountain-city"></i><p>Countryside</p></div>
+        <div class="filter"><i class="fa-solid fa-sailboat"></i><p>Boat</p></div>
+        <div class="filter"><i class="fa-solid fa-water"></i><p>Lake</p></div>
+        <div class="filter"><i class="fa-solid fa-bath"></i><p>Bath</p></div>
+        <div class="filter"><i class="fa-solid fa-mountain-city"></i><p>Countryside</p></div>
+        <div class="filter"><i class="fa-solid fa-tents"></i><p>Camping</p></div>
+        <div class="filter"><i class="fa-solid fa-water"></i><p>Lake</p></div>
+        <div class="filter"><i class="fa-solid fa-school"></i><p>School</p></div>
+        <div class="filter"><i class="fa-solid fa-place-of-worship"></i><p>Worship</p></div>
+        <div class="filter"><i class="fa-solid fa-gopuram"></i><p>Gopuram</p></div>
+        <div class="filter"><i class="fa-solid fa-industry"></i><p>Industry</p></div>
+        <div class="filter"><i class="fa-solid fa-mosque"></i><p>Mosque</p></div>
+    </div>
+    <div class="form-check form-switch form-check-reverse tax-box">
+        <div class="ms-3 me-3">
+            <input class="form-check-input" type="checkbox" id="flexSwitchCheckReverse">
+        <label class="form-check-label" for="flexSwitchCheckReverse">Dispaly price with taxes</label>
+        </div>
+    </div>
+</div>
+    <div class="row row-cols-1 row-cols-sm-1 row-cols-md-3 row-cols-lg-4 g-2">
+
+        <% for (let listing of allListings) { %>
+
+            <a href="/listings/<%= listing._id %>" class="listing-link">  
+
+                <div class="card card-listing col" >
+                    <img src="<%= listing.image.url %>" class="card-img-top" alt="<%= listing.image.filename %>" style="height: 16rem;">
+
+                    <div class="card-img-overlay">
+                        <i class="fa-regular fa-heart fa-xl" style="color: #ffffff;"></i>
+                    </div>
+
+                    <div class="card-body">
+                        <b><p class="card-text"><%= listing.title %> <br></b>
+                        &#8377;<%= listing.price ? listing.price.toLocaleString("en-IN") : 'N/A' %>/night</p>
+                    </div>
+
+                </div>
+
+            </a>
+
+        <% } %>
+
+    </div>
+
+<!-- </body> -->

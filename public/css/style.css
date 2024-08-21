@@ -1,0 +1,151 @@
+body {
+    font-family: "Plus Jakarta Sans", sans-serif !important;
+    font-optical-sizing: auto;
+    font-weight: 500 !important;
+    font-style: normal;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container {
+    flex: 1;
+}
+
+/* navbar */
+.navbar {
+    height: 4rem;
+    background-color: #f5f5f5;
+}
+
+.fa-compass {
+    color: #fe424d;
+    font-size: 2rem !important;
+}
+
+.nav-link {
+    color: #222222 !important;
+}
+.navbar-collapse {
+    width: 100%;
+    /* margin-top: 1rem; */
+    background-color: #f5f5f5; /* Choose your desired color */
+}
+
+/* footer */
+.f-info-links a {
+    text-decoration: none;
+    color: #222222;
+}
+
+.f-info-links a:hover {
+    text-decoration: underline;
+}
+
+.f-info {
+    display: flex;
+    justify-content: center;
+    height: 9rem;
+    flex-wrap: wrap;
+    background-color: #f5f5f5;
+    align-items: center;
+    justify-items: center;
+}
+
+.f-info-socials, .f-info-links, .f-info-brand {
+    width: 100%;
+    display: flex;
+    justify-items: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.f-info-socials i {
+    font-size: 1.3rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+/* cards */
+
+.card-listing {
+    border: none !important;
+    /* padding: 2rem !important; */
+    margin: 1rem;
+}
+
+
+
+.card-img-top {
+    border-radius: 0.7rem !important;
+    width: 100% !important;
+    object-fit: cover !important;
+}
+
+.card-body {
+    margin: 0 !important;
+    padding: 0  !important;
+}
+
+.row {
+    margin-bottom: 3rem;
+}
+
+.listing-link {
+    text-decoration: none;
+}
+
+/* overlay */
+
+.card-img-overlay {
+    opacity: 0;
+}
+
+.card-img-overlay:hover {
+    opacity: 0.2;
+    background-color: white;
+}
+
+.card-img-overlay i {
+    color: black;
+}
+
+.btn-pink {
+    background-color: #fe424d !important;
+    border: none !important;
+    width: 5rem;
+    color: white !important;
+}
+
+/* shows card */
+.show-img {
+    height: 40vh;
+}
+
+.btns {
+    display: flex;
+}
+
+/* map */
+#map {  
+    border: 1px solid black;
+    border-radius: 1rem;
+    height: 20rem;
+    width: 100%; 
+}
+
+/* map */
+.auto-results-wrapper.auto-is-active {
+    border: 1px solid black;
+    border-radius: 1rem;
+    display: block;
+    margin-top: 3 px;
+    position: absolute;
+    width: 100%;
+    z-index: 99999;
+    height: fit-content;
+    overflow:auto;
+    max-height: 15rem;
+
+}
+
